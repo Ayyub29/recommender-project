@@ -4,6 +4,9 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 const contentRoute = require('./routes/contentRoute');
+const authRoutes = require('./routes/authRoute');
+const userRoutes = require('./routes/userRoute');
+
 const path = require('path')
 const app = express();
 
@@ -13,6 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/content', contentRoute);
+app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 const PORT = 8000;
 

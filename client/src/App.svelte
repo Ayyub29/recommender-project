@@ -1,33 +1,27 @@
 <script>
-	// export let name;
+	import router from 'page'
 	import Navbar from './components/Navbar.svelte';
-	import Card from './components/Card.svelte';
-	
-	import { onMount } from 'svelte';
-  	import { getContent, updateCount } from "./content";
-
-	let contentList = [];
-
-	// Get the data from the api, after the page is mounted.
-	onMount(async () => {
-		const res = await getContent();
-		contentList = res;
-	});
-
-	async function handleClick() {
-		const res = await getContent();
-		contentList = res;
-		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
-	}
-</script>
-
+	// Include our Routes
+	import Home from './routes/Home.svelte'
+	import Login from './routes/Login.svelte'
+	import Register from './routes/Register.svelte'
+	// Variables
+	let page;
+	let params;
+  
+	// Set up the pages to watch for
+	router('/', () => (page = Home))
+	router('/login', () => (page = Login))
+	router('/register', () => (page = Register))
+	// Set up the router to start and actively watch for changes
+	router.start()
+	console.log("Starting Router..")
+  </script>
+  
+  
 <main>
 	<Navbar/>
-	<div class="contentList">
-		{#each contentList as { title, description, image_source, amount_click, id }, i}
-			<Card on:message={handleClick} bind:title={title} imageSource={image_source} description={description} v={amount_click} i={id}/>
-		{/each}
-	</div>
+	<svelte:component this="{page}" params="{params}" />
 </main>
 
 <style>
@@ -36,13 +30,5 @@
 		max-width:600px;
 		margin: 0px auto;
 		align-items: center;
-	}
-	.contentList{
-		background-color: beige;
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		text-align: center;
-		justify-content: center;
 	}
 </style>

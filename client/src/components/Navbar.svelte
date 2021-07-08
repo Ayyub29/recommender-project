@@ -26,11 +26,14 @@
         <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
             <Nav class="ms-auto" navbar>
             <NavItem class="linkss">
-                <NavLink href="https://github.com/Ayyub29/SvelteXNode" class="linkss">Code</NavLink>
+              <NavLink href="/login" class="linkss">Login</NavLink>
             </NavItem>
             <NavItem class="linkss">
-              <NavLink href="https://www.linkedin.com/in/ayyubabdurrahman/" class="linkss">About</NavLink>
-          </NavItem>
+              <NavLink href="/register" class="linkss">Register</NavLink>
+            </NavItem>
+            <NavItem class="linkss">
+                <NavLink href="https://github.com/Ayyub29/SvelteXNode" class="linkss">Code</NavLink>
+            </NavItem>
             </Nav>
         </Collapse>
     </Navbar>

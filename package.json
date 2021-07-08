@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^5.0.2",
     "concurrently": "^6.2.0",
@@ -21,6 +22,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.12.0",
+    "framework7-svelte": "^6.0.22",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.8",
     "path": "^0.12.7",

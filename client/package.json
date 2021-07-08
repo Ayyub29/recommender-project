@@ -13,10 +13,14 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "webpack serve --content-base public"
+    "dev": "webpack serve --content-base public",
+    "start": "sirv public --single"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "framework7": "^6.0.22",
+    "framework7-svelte": "^6.0.22",
+    "page": "^1.11.6",
     "sveltestrap": "^5.4.0"
   }
 }
