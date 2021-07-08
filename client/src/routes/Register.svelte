@@ -1,4 +1,5 @@
 <script>
+  import Api from "./../api"
     let email = "";
     let password = "";
     let username = "";
@@ -21,10 +22,20 @@
       if (confirmPassword.length === 0) {
         errors.confirmPassword = "Field should not be empty";
       }
+      if (confirmPassword !== password) {
+        errors.confirmPassword = "Password not same!";
+      }
 
       if (Object.keys(errors).length === 0) {
         isLoading = true;
-        submit({ email, password, confirmPassword, username })
+        var registerdata = {
+          email, 
+          password, 
+          confirmPassword, 
+          username
+        };
+
+        Api.post("/api/user/register", registerdata)
           .then(() => {
             isSuccess = true;
             isLoading = false;
@@ -102,7 +113,7 @@
       <div class="success">
         🔓
         <br />
-        You've been successfully signing up.
+        You've been successfully creating an account.
       </div>
     {:else}
       <h1>👤</h1>

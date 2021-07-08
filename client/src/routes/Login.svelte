@@ -1,4 +1,5 @@
 <script>
+    import Api from "./../api"
     let email = "";
     let password = "";
     let isLoading = false;
@@ -15,13 +16,19 @@
       }
       if (Object.keys(errors).length === 0) {
         isLoading = true;
-        submit({ email, password })
+        var loginField = {
+          email,
+          password
+        };
+        Api.post("/api/auth/login", loginField)
           .then(() => {
+            console.log("success");
             isSuccess = true;
             isLoading = false;
           })
           .catch(err => {
             errors.server = err;
+            console.log(err);
             isLoading = false;
           });
       }
@@ -88,7 +95,7 @@
     }
   </style>
   
-  <form on:submit|preventDefault={handleSubmit} action="/action_page.php">
+  <form on:submit|preventDefault={handleSubmit} enctype="multipart/form-data" id="loginform" method="POST">
     {#if isSuccess}
       <div class="success">
         🔓
@@ -118,7 +125,11 @@
     {/if}
     <br>
     <br>
-    <p>Already have an account? <a href="/login">Sign in</a>.</p>
+    {#if isSuccess} 
+    <br>
+    {:else}
+    <p>Don't have an account? <a href="/register">Sign Up</a>.</p>
+    {/if}
     <br>
     <br>
     <br>
