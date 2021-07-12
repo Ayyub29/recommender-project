@@ -23,6 +23,7 @@
         Api.post("/api/auth/login", loginField)
           .then(() => {
             console.log("success");
+            window.location.href = '/';
             isSuccess = true;
             isLoading = false;
           })
