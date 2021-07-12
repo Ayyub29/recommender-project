@@ -14,7 +14,7 @@
 
 	function createTracker(){
 		let kue = getKue("khongguan");
-		if (kue != "") {
+		if (kue == "" || kue == null || kue == undefined) {
 			createkue("khongguan","000000",365);
 			console.log("berhasil!");
 		} else {
