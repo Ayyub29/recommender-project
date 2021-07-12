@@ -9,7 +9,13 @@
 	onMount(async () => {
 		const res = await getContent();
 		contentList = res;
+		createTracker();
 	});
+
+	function createTracker(){
+		setCookie("khongguan","000000",365);
+		console.log("berhasil!");
+	}
 
 	async function handleClick() {
 		const res = await getContent();
