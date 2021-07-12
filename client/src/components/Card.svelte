@@ -2,11 +2,13 @@
     export let title, imageSource, v, i;
     import { createEventDispatcher } from 'svelte';
     import { updateCount } from './../content';
-
+    import { getKue, setKue } from "./../cookie";
     const dispatch = createEventDispatcher();
     function handleClick() {
       console.log("Clicked " + title + ": " + v);
       updateCount(i);
+      var biskuit = getKue("khongguan");
+      console.log(biskuit);
       dispatch('message');
     }
 </script>

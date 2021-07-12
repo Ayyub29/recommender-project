@@ -3,7 +3,7 @@
 	import Card from './../components/Card.svelte';
 	import { onMount } from 'svelte';
   	import { getContent, updateCount } from "./../content";
-	import { getCookie, setCookie } from "./../cookie";
+	import { getKue, createkue } from "./../cookie";
 	let contentList = [];
 	// Get the data from the api, after the page is mounted.
 	onMount(async () => {
@@ -13,8 +13,13 @@
 	});
 
 	function createTracker(){
-		setCookie("khongguan","000000",365);
-		console.log("berhasil!");
+		let kue = getKue("khongguan");
+		if (kue != "") {
+			createkue("khongguan","000000",365);
+			console.log("berhasil!");
+		} else {
+			console.log("siap jualan!");
+		}
 	}
 
 	async function handleClick() {

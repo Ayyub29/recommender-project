@@ -1,4 +1,4 @@
-export const getCookie = async(cname) => {
+export const getKue = (cname) => {
     try{
         const cookies = Object.fromEntries(
             document.cookie.split(/; /).map(c => {
@@ -12,7 +12,7 @@ export const getCookie = async(cname) => {
     }
 };
 
-export const setCookie = async(name,value,days) => {
+export const createkue = (name,value,days) => {
     try{
         var expires = "";
         if (days) {
@@ -25,3 +25,17 @@ export const setCookie = async(name,value,days) => {
         console.error(error);
     }
 }
+
+export const setKue = (cname) => {
+    try{
+        const cookies = Object.fromEntries(
+            document.cookie.split(/; /).map(c => {
+            const [key, v] = c.split('=', 2);
+            return [key, decodeURIComponent(v)];
+            }),
+        );
+        return cookies[cname] || '';
+    } catch (error) {
+        console.error(error);
+    }
+};
