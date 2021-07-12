@@ -3,8 +3,10 @@
 	import Card from './../components/Card.svelte';
 	import { onMount } from 'svelte';
   	import { getContent, updateCount } from "./../content";
-
+	import { getCookie, setCookie } from "./../cookie";
 	let contentList = [];
+
+	
 	function checkCookie() {
 		let username = getCookie("username");
 		if (username != "") {
@@ -12,7 +14,7 @@
 		} else {
 			username = prompt("Please enter your name:", "");
 			if (username != "" && username != null) {
-			setCookie("username", username, 365);
+				setCookie("username", username, 365);
 			}
 		}
 	}
@@ -28,8 +30,6 @@
 		contentList = res;
 		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
 	}
-
-	
 </script>
 
 <main>
