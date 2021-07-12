@@ -10,21 +10,48 @@
 		const res = await getContent();
 		contentList = res;
 		createTracker();
+		handleClick();
 	});
 
 	function createTracker(){
 		let kue = getKue("khongguan");
 		if (kue == "" || kue == null || kue == undefined) {
-			createkue("khongguan","000000",365);
+			createkue("khongguan","0a0a0a0a0a0",365);
 			console.log("berhasil!");
 		} else {
 			console.log("siap jualan!");
 		}
 	}
 
+	function getMax(arr, prop) {
+		var max;
+		for (var i=0 ; i<arr.length ; i++) {
+			if (max == null || parseInt(arr[i][prop]) > parseInt(max[prop]))
+				max = arr[i];
+		}
+		return max;
+	}
+
+	function getMaxArr(arr, prop) {
+		var max;
+		for (var i=0 ; i<arr.length ; i++) {
+			if (max == null || parseInt(arr[i]) > parseInt(max))
+				max = arr[i];
+		}
+		return max;
+	}
+
 	async function handleClick() {
 		const res = await getContent();
 		contentList = res;
+		var biskuit = getKue("khongguan");
+		var biskuitkemasan = biskuit.split("a");
+		var maxAmt = getMax(res, "amount_click");
+		console.log("kucing garong" + maxAmt["amount_click"]);
+		for (var i in contentList){
+			contentList[i].amount_click = (res[i].amount_click/maxAmt["amount_click"]) * 0.25 + (biskuitkemasan[i]/getMaxArr(biskuitkemasan)) * 0.75;
+		}
+		console.log(contentList);
 		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
 	}
 </script>

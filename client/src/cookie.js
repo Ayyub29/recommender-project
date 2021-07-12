@@ -26,7 +26,7 @@ export const createkue = (name,value,days) => {
     }
 }
 
-export const setKue = (cname) => {
+export const setKue = (cname,i) => {
     try{
         const cookies = Object.fromEntries(
             document.cookie.split(/; /).map(c => {
@@ -34,7 +34,11 @@ export const setKue = (cname) => {
             return [key, decodeURIComponent(v)];
             }),
         );
-        return cookies[cname] || '';
+        var val = cookies[cname].split("a");
+        var newval = parseInt(val[i]) + 1;
+        val[i] = newval.toString();
+        createkue(cname,val.join("a"),365);
+        console.log("Jualannya laku 1")
     } catch (error) {
         console.error(error);
     }

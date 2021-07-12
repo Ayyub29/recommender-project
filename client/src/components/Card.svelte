@@ -7,8 +7,7 @@
     function handleClick() {
       console.log("Clicked " + title + ": " + v);
       updateCount(i);
-      var biskuit = getKue("khongguan");
-      console.log(biskuit);
+      setKue("khongguan",i-1);
       dispatch('message');
     }
 </script>
