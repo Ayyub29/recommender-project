@@ -1,13 +1,19 @@
 <script>
-    import Api from "./../api"
+    import Api from "./../api";
     let email = "";
     let password = "";
     let isLoading = false;
     let isSuccess = false;
     export let submit;
     let errors = {};
+    let user = localStorage.getItem("user");
+    user = JSON.parse(user);
     const handleSubmit = () => {
       errors = {};
+      if (user != null){
+        errors.account = "You already log in!";
+        window.location.href = '/';
+      }
       if (email.length === 0) {
         errors.email = "Field should not be empty";
       }
