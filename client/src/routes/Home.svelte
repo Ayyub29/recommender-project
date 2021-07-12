@@ -8,7 +8,6 @@
 	// Get the data from the api, after the page is mounted.
 	onMount(async () => {
 		const res = await getContent();
-		checkCookie();
 		contentList = res;
 	});
 
