@@ -5,6 +5,7 @@
   	import { getContent, updateCount } from "./../content";
 	import { getKue, createkue } from "./../cookie";
 	let contentList = [];
+	let user = localStorage.getItem("user");
 	// Get the data from the api, after the page is mounted.
 	onMount(async () => {
 		const res = await getContent();
@@ -48,8 +49,10 @@
 		var biskuitkemasan = biskuit.split("a");
 		var maxAmt = getMax(res, "amount_click");
 		console.log("kucing garong" + maxAmt["amount_click"]);
-		for (var i in contentList){
-			contentList[i].amount_click = (res[i].amount_click/maxAmt["amount_click"]) * 0.25 + (biskuitkemasan[i]/getMaxArr(biskuitkemasan)) * 0.75;
+		if (user != null){
+			for (var i in contentList){
+				contentList[i].amount_click = (res[i].amount_click/maxAmt["amount_click"]) * 0.25 + (biskuitkemasan[i]/getMaxArr(biskuitkemasan)) * 0.75;
+			}
 		}
 		console.log(contentList);
 		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
