@@ -5,9 +5,21 @@
   	import { getContent, updateCount } from "./../content";
 
 	let contentList = [];
+	function checkCookie() {
+		let username = getCookie("username");
+		if (username != "") {
+		alert("Welcome again " + username);
+		} else {
+			username = prompt("Please enter your name:", "");
+			if (username != "" && username != null) {
+			setCookie("username", username, 365);
+			}
+		}
+	}
 	// Get the data from the api, after the page is mounted.
 	onMount(async () => {
 		const res = await getContent();
+		checkCookie();
 		contentList = res;
 	});
 
@@ -16,6 +28,8 @@
 		contentList = res;
 		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
 	}
+
+	
 </script>
 
 <main>
