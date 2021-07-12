@@ -28,7 +28,8 @@ exports.login = async (req, res) => {
             const response = {
               token,
               ID: userData.ID,     
-              role: userData.Role 
+              role: userData.Role,
+              username: userData.Username
             }
             res.status(200)
             .cookie('token', token, { maxAge: cookies_lifetime, path: '/' })

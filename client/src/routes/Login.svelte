@@ -21,8 +21,8 @@
           password
         };
         Api.post("/api/auth/login", loginField)
-          .then(() => {
-            console.log("success");
+          .then((result) => {
+            localStorage.setItem('user', JSON.stringify(result.data));
             window.location.href = '/';
             isSuccess = true;
             isLoading = false;
