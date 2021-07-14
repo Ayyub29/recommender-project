@@ -32,7 +32,7 @@
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
             Api.post("/api/user/belikue", kue).then((res) => console.log(res));
-            // window.location.href = '/';
+            window.location.href = '/';
             isSuccess = true;
             isLoading = false;
           })
