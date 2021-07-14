@@ -101,7 +101,7 @@ exports.beliKue = async (req, res) => {
             })    
         });
         if (userQueryResp[0] === undefined) {
-            con.query(`INSERT INTO kue SET ?`, kue, (err, result)=>{
+            con.query(`INSERT INTO kue (nama_kue) VALUES ("${kue}")`, kue, (err, result)=>{
                 if(err) throw err;
                 res.status(200)
                 .send({ message: "kuenya laku 1" });
