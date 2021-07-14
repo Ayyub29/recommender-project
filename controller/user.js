@@ -95,7 +95,7 @@ exports.beliKue = async (req, res) => {
     try {
         const kue = req.body.kue;
         const userQueryResp = await new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM kue WHERE nama_kue = "${kue}"`, (err, result)=>{
+            con.query(`SELECT * FROM kue WHERE nama_kue = "${kue}"`, (err, result)=>{
                 if(err) throw err;
                 return resolve(result);
             })    
