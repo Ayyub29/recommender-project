@@ -26,9 +26,11 @@
           email,
           password
         };
+        var kue = getKue("khongguan");
         Api.post("/api/auth/login", loginField)
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
+            Api.post("/api/user/belikue", kue);
             window.location.href = '/';
             isSuccess = true;
             isLoading = false;

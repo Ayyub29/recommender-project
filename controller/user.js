@@ -61,7 +61,6 @@ function can_register(email){
             }
         })    
     })
-    
 }
 
 
@@ -90,4 +89,28 @@ function getCount(){
             resolve(result[0].count + 1)
         })
     })
+}
+
+exports.beliKue = async (req, res) => {
+    try {
+        const kue = req.body.kue;
+        const userQueryResp = await new Promise((resolve, reject) => {
+            db.query(`SELECT * FROM kue WHERE nama_kue = "${kue}"`, (err, result)=>{
+                if(err) throw err;
+                return resolve(result);
+            })    
+        });
+        if (userQueryResp[0] === undefined) {
+            con.query(`INSERT INTO kue SET nama_kue = "${kue}"`, (err, result)=>{
+                if(err) throw err;
+                res.status(200)
+                .send({ message: "kuenya laku 1" });
+            });
+        }
+    } catch(e) {
+      console.log(e);
+      res
+      .status(500)
+      .send({msg: e.stack});
+    }
 }
