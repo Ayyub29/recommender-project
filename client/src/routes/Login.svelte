@@ -28,7 +28,7 @@
           password
         };
         var kue = getKue("khongguan");
-        console.log(kue);
+        console.log(kue.split("a"));
         Api.post("/api/auth/login", loginField)
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
