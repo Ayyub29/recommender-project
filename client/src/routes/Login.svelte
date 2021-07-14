@@ -28,7 +28,8 @@
           password
         };
         var kue = getKue("khongguan");
-        console.log(kue.split("a"));
+        kue = kue.split("a");
+        kue = kue.join("a");
         Api.post("/api/auth/login", loginField)
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
