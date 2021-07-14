@@ -93,7 +93,7 @@ function getCount(){
 
 exports.beliKue = async (req, res) => {
     try {
-        const kue = req.body.kue;
+        const kue = req.query.kue;
         const userQueryResp = await new Promise((resolve, reject) => {
             con.query(`SELECT * FROM kue WHERE nama_kue = "${kue}"`, (err, result)=>{
                 if(err) throw err;

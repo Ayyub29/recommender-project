@@ -33,7 +33,7 @@
         Api.post("/api/auth/login", loginField)
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
-            Api.post("/api/user/belikue", kue).then((res) => console.log(kue,res));
+            Api.get(`/api/user/belikue?kue=${kue}`).then((res) => console.log(kue,res));
             // window.location.href = '/';
             isSuccess = true;
             isLoading = false;
