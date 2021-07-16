@@ -12,7 +12,7 @@
     user = JSON.parse(user);
     async function tataKue(){
       var daftarKue = await Api.get("/api/kue/view");
-      console.log(daftarKue);
+      console.log(daftarKue.data);
     }
     const handleSubmit = () => {
       errors = {};
