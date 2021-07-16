@@ -10,8 +10,8 @@
     let errors = {};
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
-    function tataKue(){
-      var daftarKue = Api.get("/api/kue/view");
+    async function tataKue(){
+      var daftarKue = await Api.get("/api/kue/view");
       console.log(daftarKue);
     }
     const handleSubmit = () => {
