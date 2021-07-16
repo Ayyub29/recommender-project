@@ -1,3 +1,5 @@
+const con = require('../database');
+
 exports.beliKue = async (req, res) => {
     try {
         const kue = req.query.kue;

@@ -11,7 +11,7 @@
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
     function tataKue(){
-      daftarKue = Api.get("/api/kue/view");
+      var daftarKue = Api.get("/api/kue/view");
       console.log(daftarKue);
     }
     const handleSubmit = () => {
