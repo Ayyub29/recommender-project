@@ -4,6 +4,8 @@
 	import { onMount } from 'svelte';
   	import { getContent, updateCount } from "./../content";
 	import { getKue, createkue } from "./../cookie";
+	import { getSimilarity }  from "./../similarity";
+	
 	let contentList = [];
 	let user = localStorage.getItem("user");
 	// Get the data from the api, after the page is mounted.
@@ -33,7 +35,7 @@
 		return max;
 	}
 
-	function getMaxArr(arr, prop) {
+	function getMaxArr(arr) {
 		var max;
 		for (var i=0 ; i<arr.length ; i++) {
 			if (max == null || parseInt(arr[i]) > parseInt(max))
@@ -42,11 +44,40 @@
 		return max;
 	}
 
+	function getMinArr(arr) {
+		var min;
+		for (var i=0 ; i<arr.length ; i++) {
+			if (min == null || parseInt(arr[i]) < parseInt(min))
+				min = arr[i];
+		}
+		return min;
+	}
+
+	function getMeanArr(arr) {
+		var sum;
+		for (var i=0 ; i<arr.length ; i++) {
+			sum += arr[i];
+		}
+		return sum/(arr.length);
+	}
+
+	function prepareToken(){
+		var biskuit = getKue("khongguan");
+		var biskuitkemasan = biskuit.split("a");
+		var new_token = [0,0,0,0,0,0];
+		var max = getMaxArr(biskuitkemasan);
+		var min = getMinArr(biskuitkemasan);
+		var mean = getMeanArr(biskuitkemasan);
+		for (var i in biskuitkemasan){
+			new_token[i] = biskuitkemasan[i] - mean / (max-min);
+		}
+		return new_token;
+	}
+
 	async function handleClick() {
 		const res = await getContent();
 		contentList = res;
-		var biskuit = getKue("khongguan");
-		var biskuitkemasan = biskuit.split("a");
+		
 		var maxAmt = getMax(res, "amount_click");
 		console.log("kucing garong" + maxAmt["amount_click"]);
 		if (user != null){

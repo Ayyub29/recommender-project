@@ -1,17 +1,36 @@
-export const getKue = (cname) => {
+export const getSimilarity = (card1,card2) => {
     try{
-        const cookies = Object.fromEntries(
-            document.cookie.split(/; /).map(c => {
-            const [key, v] = c.split('=', 2);
-            return [key, decodeURIComponent(v)];
-            }),
-        );
-        return cookies[cname] || '';
+        dotProduct = getDotProduct(card1,card2);
+        mag_1 = getMagnitude(card1);
+        mag_2 = getMagnitude(card2);
+        return dotProduct / (mag_1 * mag_2)
     } catch (error) {
         console.error(error);
     }
 };
 
-function getDotProduct(list, list){
-    
+export const getSimilarityList = async () => {
+    try {
+      const response = await Api.get("/api/similarity/view");
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+};
+
+function getDotProduct(card1, card2){
+    result = 0;
+    for (i in range(len(card1))){
+        result += card1[i] * card2[i];
+    }
+    return result;
 }
+
+function getMagnitude(card){
+    result = 0;
+    for (i in range(len(card))){
+        result += card[i] * card[i];
+    }
+    return Math.sqrt(result);
+}
+

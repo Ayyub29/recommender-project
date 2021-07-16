@@ -6,9 +6,14 @@
     let isLoading = false;
     let isSuccess = false;
     export let submit;
+
     let errors = {};
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
+    function tataKue(){
+      daftarKue = Api.get("/api/kue/view");
+      console.log(daftarKue);
+    }
     const handleSubmit = () => {
       errors = {};
       if (user != null){
@@ -33,8 +38,9 @@
         Api.post("/api/auth/login", loginField)
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
-            Api.get(`/api/user/belikue?kue=${kue}`).then((res) => console.log(kue,res));
-            window.location.href = '/';
+            Api.get(`/api/kue/belikue?kue=${kue}`).then((res) => console.log(kue,res));
+            tataKue();
+            // window.location.href = '/';
             isSuccess = true;
             isLoading = false;
           })
