@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 const kueController = require('../controller/similarity');
 
 // Login
