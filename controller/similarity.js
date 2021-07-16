@@ -24,7 +24,7 @@ exports.beliKue = async (req, res) => {
     }
 }
 
-exports.liatkue = async (req, res) => {
+exports.liatKue = async (req, res) => {
 	try {
 		con.query(`SELECT * FROM cardsimilarity`, (err, result)=>{
 			if (err) throw err;
@@ -32,7 +32,7 @@ exports.liatkue = async (req, res) => {
 			res.status(200).send({
 				message: "Here is your Request",
 				data: result
-			})
+			});
 		})    
 	} catch (e) {
 		console.log(e.stack);
