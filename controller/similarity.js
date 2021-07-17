@@ -126,7 +126,7 @@ function getMeanArr(arr) {
 }
 
 function getDotProduct(card1, card2){
-    result = 0;
+    var result = 0;
     for (var i=0 ; i < card1.length ; i++){
         result += card1[i] * card2[i];
     }
@@ -134,7 +134,7 @@ function getDotProduct(card1, card2){
 }
 
 function getMagnitude(card){
-    result = 0;
+    var result = 0;
     for (var i=0 ; i < card.length ; i++){
         result += card[i] * card[i];
     }

@@ -2,9 +2,9 @@ import Api from "./api";
 
 export const getSimilarity = (card1,card2) => {
     try{
-        dotProduct = getDotProduct(card1,card2);
-        mag_1 = getMagnitude(card1);
-        mag_2 = getMagnitude(card2);
+        var dotProduct = getDotProduct(card1,card2);
+        var mag_1 = getMagnitude(card1);
+        var mag_2 = getMagnitude(card2);
         return dotProduct / (mag_1 * mag_2)
     } catch (error) {
         console.error(error);
