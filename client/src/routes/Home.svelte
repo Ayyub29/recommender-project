@@ -100,6 +100,7 @@
 		var biskuitkemasan = prepareToken(biskuit);
 		var maxAmt = getMax(res, "amount_click");
 		var sim_score = getSimilarityScore(biskuitkemasan,similarity_list);
+		console.log(biskuitkemasan);
 		console.log(sim_score);
 
 		if (user != null){
