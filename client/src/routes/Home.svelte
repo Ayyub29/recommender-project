@@ -72,6 +72,7 @@
 			}
 			score.push(sim_sum);
 		}
+		console.log(score);
 		for (var k in score){
 			for (var l in score){
 				score_sum[k] += score[k][l];
@@ -105,7 +106,7 @@
 
 		if (user != null){
 			for (var i in contentList){
-				contentList[i].amount_click = (res[i].amount_click/maxAmt["amount_click"]) * 0.25 + (biskuitkemasan[i]/getMaxArr(biskuitkemasan)) * 0.75;
+				contentList[i].amount_click = (res[i].amount_click/maxAmt["amount_click"]) * 0.25 + sim_score[i] * 0.75;
 			}
 		}
 		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
