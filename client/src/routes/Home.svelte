@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
   	import { getContent, updateCount } from "./../content";
 	import { getKue, createkue } from "./../cookie";
-	import { getSimilarity }  from "./../similarity";
+	import { getSimilarity, getSimilarityList }  from "./../similarity";
 	
 	let contentList = [];
 	let user = localStorage.getItem("user");

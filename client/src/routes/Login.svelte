@@ -36,7 +36,6 @@
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
             Api.get(`/api/kue/beliKue?kue=${kue}`).then((res) => console.log(kue,res));
-            tataKue();
             window.location.href = '/';
             isSuccess = true;
             isLoading = false;
