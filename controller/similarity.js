@@ -40,3 +40,20 @@ exports.liatKue = async (req, res) => {
    		 .send({msg: e.stack});
 	}
 }
+
+exports.updateKue = async (req, res) => {
+	try {
+		con.query(`SELECT * FROM kue`, (err, result)=>{
+			if (err) throw err;
+			console.log(result);
+			res.status(200).send({
+				message: "Here is your Request",
+				data: result
+			});
+		})    
+	} catch (e) {
+		console.log(e.stack);
+		res.status(400)
+   		 .send({msg: e.stack});
+	}
+}

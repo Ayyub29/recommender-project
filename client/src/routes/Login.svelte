@@ -10,10 +10,16 @@
     let errors = {};
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
-    async function tataKue(){
-      var daftarKue = await Api.get("/api/kue/liatkue");
-      console.log(daftarKue.data);
-    }
+    
+    // async function tataKue(){
+    //   var daftarKue = await Api.get("/api/kue/liatKue");
+    //   var cards_list = [];
+    //   for (i in daftarKue.data){
+    //     cards_list.push(daftarKue.data[i]);
+    //   }
+
+
+    // }
     const handleSubmit = () => {
       errors = {};
       if (user != null){
@@ -38,9 +44,9 @@
         Api.post("/api/auth/login", loginField)
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
-            Api.get(`/api/kue/belikue?kue=${kue}`).then((res) => console.log(kue,res));
-            tataKue();
-            // window.location.href = '/';
+            Api.get(`/api/kue/beliKue?kue=${kue}`).then((res) => console.log(kue,res));
+            // tataKue();
+            window.location.href = '/';
             isSuccess = true;
             isLoading = false;
           })
