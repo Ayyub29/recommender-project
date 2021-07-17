@@ -75,7 +75,7 @@
 		console.log(score);
 		for (var k in score){
 			for (var l in score){
-				score_sum[k] += score[k][l];
+				score_sum[k] += score[l][k];
 			}
 		}
 		return score_sum;
