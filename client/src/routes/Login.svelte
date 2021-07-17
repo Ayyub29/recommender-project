@@ -11,15 +11,14 @@
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
     
-    // async function tataKue(){
-    //   var daftarKue = await Api.get("/api/kue/liatKue");
-    //   var cards_list = [];
-    //   for (i in daftarKue.data){
-    //     cards_list.push(daftarKue.data[i]);
-    //   }
-
-
-    // }
+    async function tataKue(){
+      var daftarKue = await Api.get("/api/kue/liatKue");
+      var cards_list = [];
+      for (i in daftarKue.data){
+        cards_list.push(daftarKue.data[i]);
+      }
+      console.log(cards_list);
+    }
     const handleSubmit = () => {
       errors = {};
       if (user != null){
@@ -45,8 +44,8 @@
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
             Api.get(`/api/kue/beliKue?kue=${kue}`).then((res) => console.log(kue,res));
-            // tataKue();
-            window.location.href = '/';
+            tataKue();
+            // window.location.href = '/';
             isSuccess = true;
             isLoading = false;
           })
