@@ -72,6 +72,7 @@
 
 	function prepareToken(token){
 		var biskuitkemasan = token.split("a");
+		console.log(biskuitkemasan);
 		var new_token = [0,0,0,0,0,0];
 		var max = getMaxArr(biskuitkemasan);
 		var min = getMinArr(biskuitkemasan);
