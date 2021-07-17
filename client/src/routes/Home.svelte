@@ -16,6 +16,15 @@
 		handleClick();
 	});
 
+	async function tataKue(){
+      var daftarKue = await Api.get("/api/kue/liatKue");
+      var cards_list = [];
+      for (var i in daftarKue.data){
+        cards_list.push(daftarKue.data[i]);
+      }
+      console.log(cards_list);
+    }
+
 	function createTracker(){
 		let kue = getKue("khongguan");
 		if (kue == "" || kue == null || kue == undefined) {
@@ -61,9 +70,8 @@
 		return sum/(arr.length);
 	}
 
-	function prepareToken(){
-		var biskuit = getKue("khongguan");
-		var biskuitkemasan = biskuit.split("a");
+	function prepareToken(token){
+		var biskuitkemasan = token.split("a");
 		var new_token = [0,0,0,0,0,0];
 		var max = getMaxArr(biskuitkemasan);
 		var min = getMinArr(biskuitkemasan);
@@ -77,15 +85,16 @@
 	async function handleClick() {
 		const res = await getContent();
 		contentList = res;
-		
+		var biskuit = getKue("khongguan");
+		var biskuitkemasan = prepareToken(biskuit);
+		console.log(biskuitkemasan);
 		var maxAmt = getMax(res, "amount_click");
-		console.log("kucing garong" + maxAmt["amount_click"]);
+
 		if (user != null){
 			for (var i in contentList){
 				contentList[i].amount_click = (res[i].amount_click/maxAmt["amount_click"]) * 0.25 + (biskuitkemasan[i]/getMaxArr(biskuitkemasan)) * 0.75;
 			}
 		}
-		console.log(contentList);
 		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
 	}
 </script>

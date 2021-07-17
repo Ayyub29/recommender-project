@@ -11,16 +11,6 @@
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
     
-    async function tataKue(){
-      var daftarKue = await Api.get("/api/kue/liatKue");
-      var cards_list = [];
-      console.log(daftarKue.data);
-      for (var i in daftarKue.data){
-        console.log(i);
-        cards_list.push(daftarKue.data[i]);
-      }
-      console.log(cards_list);
-    }
     const handleSubmit = () => {
       errors = {};
       if (user != null){
@@ -47,7 +37,7 @@
             localStorage.setItem('user', JSON.stringify(result.data));
             Api.get(`/api/kue/beliKue?kue=${kue}`).then((res) => console.log(kue,res));
             tataKue();
-            // window.location.href = '/';
+            window.location.href = '/';
             isSuccess = true;
             isLoading = false;
           })

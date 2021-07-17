@@ -20,7 +20,7 @@ export const getSimilarityList = async () => {
 
 function getDotProduct(card1, card2){
     result = 0;
-    for (i in range(len(card1))){
+    for (var i=0 ; i < card1.length ; i++){
         result += card1[i] * card2[i];
     }
     return result;
@@ -28,9 +28,8 @@ function getDotProduct(card1, card2){
 
 function getMagnitude(card){
     result = 0;
-    for (i in range(len(card))){
+    for (var i=0 ; i < card.length ; i++){
         result += card[i] * card[i];
     }
     return Math.sqrt(result);
 }
-
