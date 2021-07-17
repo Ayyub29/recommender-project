@@ -63,12 +63,21 @@
 	}
 
 	function getSimilarityScore(token,similarity_list){
-		var score = [0,0,0,0,0,0];
-		for (var i in similarity_list){
-			score[i] = getSimilarity(token,similarity_list[i]);
-			console.log(score[i]);
+		var score = [];
+		var score_sum = [0,0,0,0,0,0];
+		for (var j in token){
+			var sim_sum = [];
+			for (var i in similarity_list){
+				sim_sum.push(similarity_list[j][i] * token[j]); 
+			}
+			score.push(sim_sum);
 		}
-		return score;
+		for (var k in score){
+			for (var l in score){
+				score_sum[k] += score[k][l];
+			}
+		}
+		return score_sum;
 	}
 
 	function prepareToken(token){
