@@ -62,6 +62,14 @@
 		return sum/(arr.length);
 	}
 
+	function getSimilarityScore(token,similarity_list){
+		var score = [0,0,0,0,0,0];
+		for (i in similarity_list){
+			score[i] = getSimilarity(token,similarity_list[i]).toFixed(3);
+		}
+		return score;
+	}
+
 	function prepareToken(token){
 		var biskuitkemasan = token.split("a");
 		var new_token = [0,0,0,0,0,0];
@@ -80,9 +88,9 @@
 		contentList = res;
 		var biskuit = getKue("khongguan");
 		var biskuitkemasan = prepareToken(biskuit);
-		console.log(biskuitkemasan);
-		console.log(similarity_list);
 		var maxAmt = getMax(res, "amount_click");
+		var sim_score = getSimilarityScore(biskuitkemasan,similarity_list);
+		console.log(sim_score);
 
 		if (user != null){
 			for (var i in contentList){

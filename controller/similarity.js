@@ -28,10 +28,14 @@ exports.liatKue = async (req, res) => {
 	try {
 		con.query(`SELECT * FROM cardsimilarity`, (err, result)=>{
 			if (err) throw err;
-			console.log(result);
+            var result_data = [];
+			for (var i in result){
+                var row = [result[i].card1,result[i].card2,result[i].card3,result[i].card4,result[i].card5,result[i].card6];
+                result_data.push(row);
+            }
 			res.status(200).send({
 				message: "Here is your Request",
-				data: result
+				data: result_data
 			});
 		}) 
 	} catch (e) {
