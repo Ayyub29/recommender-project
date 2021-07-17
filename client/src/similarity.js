@@ -1,3 +1,5 @@
+import Api from "./api";
+
 export const getSimilarity = (card1,card2) => {
     try{
         dotProduct = getDotProduct(card1,card2);

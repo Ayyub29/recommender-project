@@ -7,7 +7,7 @@
 	import { getSimilarity, getSimilarityList }  from "./../similarity";
 	
 	let contentList = [];
-	let similarity_list = getSimilarityList();
+	let similarity_list = await getSimilarityList();
 	
 	let user = localStorage.getItem("user");
 	// Get the data from the api, after the page is mounted.
