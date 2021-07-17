@@ -11,9 +11,10 @@ export const getSimilarity = (card1,card2) => {
     }
 };
 
+// Method to get a list of all Pokemon
 export const getSimilarityList = async () => {
     try {
-      const response = await Api.get("/api/similarity/view");
+      const response = await Api.get("/api/kue/liatKue");
       return response.data;
     } catch (error) {
       console.error(error);

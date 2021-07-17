@@ -7,7 +7,6 @@
 	import { getSimilarity, getSimilarityList }  from "./../similarity";
 	
 	let contentList = [];
-	let similarity_list = await getSimilarityList();
 	
 	let user = localStorage.getItem("user");
 	// Get the data from the api, after the page is mounted.
@@ -77,6 +76,7 @@
 
 	async function handleClick() {
 		const res = await getContent();
+		const similarity_list = await getSimilarityList();
 		contentList = res;
 		var biskuit = getKue("khongguan");
 		var biskuitkemasan = prepareToken(biskuit);
