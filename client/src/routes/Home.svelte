@@ -7,6 +7,8 @@
 	import { getSimilarity, getSimilarityList }  from "./../similarity";
 	
 	let contentList = [];
+	let similarity_list = getSimilarityList();
+	
 	let user = localStorage.getItem("user");
 	// Get the data from the api, after the page is mounted.
 	onMount(async () => {
@@ -15,15 +17,6 @@
 		createTracker();
 		handleClick();
 	});
-
-	async function tataKue(){
-      var daftarKue = await Api.get("/api/kue/liatKue");
-      var cards_list = [];
-      for (var i in daftarKue.data){
-        cards_list.push(daftarKue.data[i]);
-      }
-      console.log(cards_list);
-    }
 
 	function createTracker(){
 		let kue = getKue("khongguan");
@@ -77,7 +70,7 @@
 		var min = getMinArr(biskuitkemasan);
 		var mean = getMeanArr(biskuitkemasan);
 		for (var i in biskuitkemasan){
-			new_token[i] = biskuitkemasan[i] - mean / (max-min);
+			new_token[i] = ((biskuitkemasan[i] - mean) / (max-min)).toFixed(3);
 		}
 		return new_token;
 	}
@@ -88,6 +81,7 @@
 		var biskuit = getKue("khongguan");
 		var biskuitkemasan = prepareToken(biskuit);
 		console.log(biskuitkemasan);
+		console.log(similarity_list);
 		var maxAmt = getMax(res, "amount_click");
 
 		if (user != null){
