@@ -14,7 +14,7 @@
     async function tataKue(){
       var daftarKue = await Api.get("/api/kue/liatKue");
       var cards_list = [];
-      for (i in daftarKue.data){
+      for (var i in daftarKue.data){
         cards_list.push(daftarKue.data[i]);
       }
       console.log(cards_list);
