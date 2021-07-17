@@ -63,16 +63,15 @@
 	}
 
 	function getMeanArr(arr) {
-		var sum;
-		for (var i=0 ; i<arr.length ; i++) {
-			sum += arr[i];
+		var sum = 0;
+		for (var i=0 ; i < arr.length ; i++) {
+			sum += parseInt(arr[i]);
 		}
 		return sum/(arr.length);
 	}
 
 	function prepareToken(token){
 		var biskuitkemasan = token.split("a");
-		console.log(biskuitkemasan);
 		var new_token = [0,0,0,0,0,0];
 		var max = getMaxArr(biskuitkemasan);
 		var min = getMinArr(biskuitkemasan);
