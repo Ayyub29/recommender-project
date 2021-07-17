@@ -64,8 +64,9 @@
 
 	function getSimilarityScore(token,similarity_list){
 		var score = [0,0,0,0,0,0];
-		for (i in similarity_list){
+		for (var i in similarity_list){
 			score[i] = getSimilarity(token,similarity_list[i]).toFixed(3);
+			console.log(score[i]);
 		}
 		return score;
 	}
