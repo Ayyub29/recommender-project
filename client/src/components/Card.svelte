@@ -1,13 +1,15 @@
 <script lang="ts">
     export let title, imageSource, v, i;
     import { createEventDispatcher } from 'svelte';
-    import { updateCount } from './../content';
-    import { getKue, setKue } from "./../cookie";
+    import { updateCount } from '../utils/content';
+    import { get_cookies, set_cookies } from "../utils/cookie";
     const dispatch = createEventDispatcher();
+
+    //function to handle a program click
     function handleClick() {
-      console.log("Clicked " + title + ": " + v);
-      updateCount(i);
-      setKue("khongguan",i-1);
+      // console.log("Clicked " + title + ": " + v);
+      updateCount(i); //update program amount_click
+      set_cookies("khongguan",i-1); //update tracker amount_click
       dispatch('message');
     }
 </script>

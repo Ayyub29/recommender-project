@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 
 var count = 4;
 
+//create new user
 exports.register = async (req, res) => {
 
     console.log(req.body);

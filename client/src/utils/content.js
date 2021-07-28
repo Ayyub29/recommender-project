@@ -1,6 +1,6 @@
 import Api from "./api";
 
-// Method to get a list of all Pokemon
+// API to get list of content
 export const getContent = async () => {
     try {
       const response = await Api.get("/api/content/view");
@@ -10,7 +10,8 @@ export const getContent = async () => {
     }
 };
 
-// Get a pokemon details by name
+// API to update click amount in database
+// @param id : id program that clicked
 export const updateCount = async(id) => {
     try {
       const response = await Api.put(`/api/content/click/${id}`);

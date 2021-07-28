@@ -1,11 +1,11 @@
 <script>
-    import Api from "./../api";
-    import { getKue, createkue } from "./../cookie";
+    import Api from "../utils/api";
+    import { get_cookies, create_cookies } from "../utils/cookie";
+
     let email = "";
     let password = "";
     let isLoading = false;
     let isSuccess = false;
-    export let submit;
 
     let errors = {};
     let user = localStorage.getItem("user");
@@ -29,13 +29,12 @@
           email,
           password
         };
-        var kue = getKue("khongguan");
-        kue = kue.split("a");
-        kue = kue.join("a");
+
+        var click_tracker_cookies = get_cookies("khongguan");
         Api.post("/api/auth/login", loginField)
           .then((result) => {
             localStorage.setItem('user', JSON.stringify(result.data));
-            Api.get(`/api/kue/beliKue?kue=${kue}`).then((res) => console.log(kue,res));
+            Api.get(`/api/Cookies/beliCookies?Cookies=${click_tracker_cookies}`);
             window.location.href = '/';
             isSuccess = true;
             isLoading = false;
@@ -119,10 +118,10 @@
     {:else}
       <h1>👤</h1>
   
-      <label>Email</label>
+      <label for="email">Email</label>
       <input name="email" placeholder="name@example.com" bind:value={email} />
   
-      <label>Password</label>
+      <label for="password"> Password</label>
       <input name="password" type="password" bind:value={password} />
   
       <button type="submit">

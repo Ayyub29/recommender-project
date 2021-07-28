@@ -1,13 +1,14 @@
 <script>
-  import Api from "./../api"
+  import Api from "./../utils/api"
     let email = "";
     let password = "";
     let username = "";
     let confirmPassword = "";
     let isLoading = false;
     let isSuccess = false;
-    export let submit;
     let errors = {};
+
+    //function to handle new account registration
     const handleSubmit = () => {
       errors = {};
       if (email.length === 0) {
@@ -118,19 +119,19 @@
     {:else}
       <h1>👤</h1>
   
-      <label>Email</label>
+      <label for="email">Email</label>
       <input name="email" placeholder="name@example.com" bind:value={email} />
       
-      <label>Username</label>
+      <label for="username">Username</label>
       <input name="username" placeholder="username" bind:value={username} />
 
-      <label>Password</label>
+      <label for="password">Password</label>
       <input name="password" type="password" bind:value={password} />
   
-      <label>Confirm Password</label>
+      <label for="password">Confirm Password</label>
       <input name="password" type="password" bind:value={confirmPassword} />
 
-      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+      <p>By creating an account you agree to our <a href="/">Terms & Privacy</a>.</p>
 
       <button type="submit">
         {#if isLoading}Registering ...{:else}Sign Up 🔒{/if}

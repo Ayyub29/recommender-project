@@ -1,15 +1,16 @@
 const con = require('../database');
 
+//insert program value into similarity matrix
 exports.beliKue = async (req, res) => {
     try {
         const kue = req.query.kue;
-        const userQueryResp = await new Promise((resolve, reject) => {
+        const userQueryResp = await new Promise((resolve, reject) => { //checking if program available in the matrix
             con.query(`SELECT * FROM kue WHERE nama_kue = "${kue}"`, (err, result)=>{
                 if(err) throw err;
                 return resolve(result);
             })    
         });
-        if (userQueryResp[0] === undefined) {
+        if (userQueryResp[0] === undefined) { //if program not in similarity matrix, insert program
             con.query(`INSERT INTO kue (nama_kue) VALUES ("${kue}")`, kue, (err, result)=>{
                 if(err) throw err;
                 res.status(200)
@@ -24,6 +25,7 @@ exports.beliKue = async (req, res) => {
     }
 }
 
+//get similarity matrix
 exports.liatKue = async (req, res) => {
 	try {
 		con.query(`SELECT * FROM cardsimilarity`, (err, result)=>{
@@ -45,6 +47,7 @@ exports.liatKue = async (req, res) => {
 	}
 }
 
+//Updating similarity matrix
 exports.updateKue = async (req, res) => {
 	try {
         const daftarKue = await new Promise((resolve, reject) => {
@@ -79,14 +82,11 @@ exports.updateKue = async (req, res) => {
             }
         }
         for (m in similarity_list){
-            console.log("iterasi ke: " + m);
             var var_name = parseInt(parseInt(m) + 1).toString();
-            console.log(var_name);
             con.query(`UPDATE cardsimilarity SET card1 = ${parseFloat(similarity_list[m][0])}, card2 = ${parseFloat(similarity_list[m][1])},card3 = ${parseFloat(similarity_list[m][2])},card4 = ${parseFloat(similarity_list[m][3])},card5 = ${parseFloat(similarity_list[m][4])},card6 = ${parseFloat(similarity_list[m][5])} WHERE name=${var_name}`, (err, result) => {
 				if (err) throw err;
-                console.log(result);
+                // console.log(result);
 			})
-			console.log("Update cardsimilarity Success")
         }
         res.status(200).send({
             message: "Here is your Request",
@@ -99,6 +99,9 @@ exports.updateKue = async (req, res) => {
 	}
 }
 
+//searching max value of a regular array
+// @param array
+// @result maximum value of an array
 function getMaxArr(arr) {
     var max;
     for (var i=0 ; i<arr.length ; i++) {
@@ -108,6 +111,9 @@ function getMaxArr(arr) {
     return max;
 }
 
+//searching min value of a regular array
+// @param array
+// @result minimum value of an array
 function getMinArr(arr) {
     var min;
     for (var i=0 ; i<arr.length ; i++) {
@@ -117,6 +123,9 @@ function getMinArr(arr) {
     return min;
 }
 
+//searching mean value of a regular array
+// @param array
+// @result mean value of an array
 function getMeanArr(arr) {
     var sum = 0;
     for (var i=0 ; i < arr.length ; i++) {
@@ -125,22 +134,31 @@ function getMeanArr(arr) {
     return sum/(arr.length);
 }
 
-function getDotProduct(card1, card2){
+//calculate dot product of two vector
+// @param two vector
+// @result dot product of two vector
+function getDotProduct(vec1, vec2){
     var result = 0;
-    for (var i=0 ; i < card1.length ; i++){
-        result += card1[i] * card2[i];
+    for (var i=0 ; i < vec1.length ; i++){
+        result += vec1[i] * vec2[i];
     }
     return result;
 }
 
-function getMagnitude(card){
+//calculate magnitude of a vector
+// @param vector
+// @result magnitude of a vector
+function getMagnitude(vec){
     var result = 0;
-    for (var i=0 ; i < card.length ; i++){
-        result += card[i] * card[i];
+    for (var i=0 ; i < vec.length ; i++){
+        result += vec[i] * vec[i];
     }
     return Math.sqrt(result);
 }
 
+// calculate the result of similarity of two vector
+// @param two vector
+// @result similarity between vector
 function getSimilarity(card1,card2){
     try{
         dotProduct = getDotProduct(card1,card2);
@@ -152,6 +170,9 @@ function getSimilarity(card1,card2){
     }
 }
 
+// transpose a matrix
+// @param matrix
+// @result transposed matrix
 function transpose(list){
     try{
         transposed_list = {};

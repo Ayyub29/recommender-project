@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Api from "./../api"
+    import Api from "./../utils/api"
     import {
       Collapse,
       Navbar,
@@ -7,16 +7,13 @@
       NavbarBrand,
       Nav,
       NavItem,
-      NavLink,
-      Dropdown,
-      DropdownToggle,
-      DropdownMenu,
-      DropdownItem
+      NavLink
     } from 'sveltestrap';
   
     let isOpen = false;
     let user = localStorage.getItem("user");
     user = JSON.parse(user);
+
     function handleLogout() {
       Api.post("/api/auth/logout")
       .then((result) => {
@@ -24,12 +21,14 @@
         window.location.href = '/';
       });
     }
+    
     function handleUpdate(event) {
       isOpen = event.detail.isOpen;
     }
     
   </script>
 
+    <!-- svelte-ignore missing-declaration -->
     <Navbar light class="navbar" expand="md">
         <NavbarBrand href="/"><img class="image" alt="logo" src="https://media-exp3.licdn.com/dms/image/C560BAQExXoxrMzrDIQ/company-logo_200_200/0/1613449675547?e=2159024400&v=beta&t=x0obkjYM3fj153PSWwcX6IfWUNZiLUc0yhTFItqF0iQ"/></NavbarBrand>
         <NavbarToggler class="toggleButton" style="border-color:black; color:black; background-color:khaki;" on:click={() => (isOpen = !isOpen)} />
@@ -62,17 +61,4 @@
       height: 60px;
       margin-left: 45px;
     }
-    .navbar{
-      background-color: white;
-      position: fixed;
-    }
-    .toggleButton > span{
-      color:black;
-    }
-
-    .navbar-toggler-icon{
-      color:black;
-      background-color: black;
-    }
-    
   </style>

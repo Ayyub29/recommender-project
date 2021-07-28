@@ -2,14 +2,15 @@
 	// export let name;
 	import Card from './../components/Card.svelte';
 	import { onMount } from 'svelte';
-  	import { getContent, updateCount } from "./../content";
-	import { getKue, createkue } from "./../cookie";
-	import { getSimilarity, getSimilarityList }  from "./../similarity";
+  	import { getContent, updateCount } from "../utils/content";
+	import { get_cookies, create_cookies, createTracker, prepareToken } from "../utils/cookie";
+	import { getSimilarity, getSimilarityList,getMax,getMaxArr,getMeanArr,getMinArr,getSimilarityScore}  from "../utils/similarity";
 	
 	let contentList = [];
 	
 	let user = localStorage.getItem("user");
-	// Get the data from the api, after the page is mounted.
+
+	// Get the data from the api & create click tracker & sort the data after the page is mounted. 
 	onMount(async () => {
 		const res = await getContent();
 		contentList = res;
@@ -17,100 +18,26 @@
 		handleClick();
 	});
 
-	function createTracker(){
-		let kue = getKue("khongguan");
-		if (kue == "" || kue == null || kue == undefined) {
-			createkue("khongguan","0a0a0a0a0a0",365);
-			console.log("berhasil!");
-		} else {
-			console.log("siap jualan!");
-		}
-	}
-
-	function getMax(arr, prop) {
-		var max;
-		for (var i=0 ; i<arr.length ; i++) {
-			if (max == null || parseInt(arr[i][prop]) > parseInt(max[prop]))
-				max = arr[i];
-		}
-		return max;
-	}
-
-	function getMaxArr(arr) {
-		var max;
-		for (var i=0 ; i<arr.length ; i++) {
-			if (max == null || parseInt(arr[i]) > parseInt(max))
-				max = arr[i];
-		}
-		return max;
-	}
-
-	function getMinArr(arr) {
-		var min;
-		for (var i=0 ; i<arr.length ; i++) {
-			if (min == null || parseInt(arr[i]) < parseInt(min))
-				min = arr[i];
-		}
-		return min;
-	}
-
-	function getMeanArr(arr) {
-		var sum = 0;
-		for (var i=0 ; i < arr.length ; i++) {
-			sum += parseInt(arr[i]);
-		}
-		return sum/(arr.length);
-	}
-
-	function getSimilarityScore(token,similarity_list){
-		var score = [];
-		var score_sum = [0,0,0,0,0,0];
-		for (var j in token){
-			var sim_sum = [];
-			for (var i in similarity_list){
-				sim_sum.push(similarity_list[j][i] * token[j]); 
-			}
-			score.push(sim_sum);
-		}
-		console.log(score);
-		for (var k in score){
-			for (var l in score){
-				score_sum[k] += score[l][k];
-			}
-		}
-		return score_sum;
-	}
-
-	function prepareToken(token){
-		var biskuitkemasan = token.split("a");
-		var new_token = [0,0,0,0,0,0];
-		var max = getMaxArr(biskuitkemasan);
-		var min = getMinArr(biskuitkemasan);
-		var mean = getMeanArr(biskuitkemasan);
-		for (var i in biskuitkemasan){
-			new_token[i] = ((biskuitkemasan[i] - mean) / (max-min)).toFixed(3);
-		}
-		return new_token;
-	}
-
+	//function to sort data value after program click
 	async function handleClick() {
 		const res = await getContent();
 		const similarity_list = await getSimilarityList();
-		contentList = res;
-		var biskuit = getKue("khongguan");
-		var biskuitkemasan = prepareToken(biskuit);
-		var maxAmt = getMax(res, "amount_click");
-		var sim_score = getSimilarityScore(biskuitkemasan,similarity_list);
-		console.log(biskuitkemasan);
-		console.log(sim_score);
 
-		if (user != null){
+		contentList = res;
+		var click_tracker = getCookies("khongguan"); //tracker cookies
+		var std_tracker = prepareToken(click_tracker); //standardized value of tracker cookies
+		var maxAmt = getMax(res, "amount_click"); //max amount of amount click
+		var sim_score = getSimilarityScore(std_tracker,similarity_list); //similarity score of program
+
+		if (user != null){ //if user logged in, sort data by similarity metric
 			for (var i in contentList){
 				contentList[i].amount_click = (res[i].amount_click/maxAmt["amount_click"]) * 0.25 + sim_score[i] * 0.75;
 			}
 		}
+
 		contentList = contentList.sort(function(a, b){return b.amount_click - a.amount_click});
 	}
+
 </script>
 
 <main>
